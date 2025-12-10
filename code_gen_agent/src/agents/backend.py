@@ -1,0 +1,37 @@
+import json
+from langchain_core.messages import AIMessage
+from src.core.state import GraphState
+from src.utils.llm_helper import invoke_llm_json, print_message_event
+from src.prompts.system_prompts import BACKEND_PROMPT
+
+def backend_node(state: GraphState):
+    print("\n" + "="*60)
+    print("⚙️  BACKEND: Generating FastAPI Code")
+    print("="*60)
+    
+    api_spec = state["api_spec"]
+    errors = state.get("structured_errors", [])
+    
+    my_errors = [e for e in errors if e['agent'] == 'backend']
+    
+    if not my_errors:
+        print("📝 Mode: Initial Code Generation")
+        user_prompt = f"Generate a FastAPI app for this API: {api_spec}"
+    else:
+        print(f"🔧 Mode: Fixing {len(my_errors)} error(s)")
+        current_code = state.get("backend_files", {})
+        user_prompt = (
+            f"Here is your previous code: {json.dumps(current_code)}\n"
+            f"Here are the errors you must fix: {json.dumps(my_errors)}\n"
+            f"Return the full corrected code."
+        )
+    
+    files = invoke_llm_json(BACKEND_PROMPT, user_prompt)
+    
+    ai_msg = AIMessage(content="Backend code generated/updated.")
+    print_message_event("backend", ai_msg.content, "new_message_added")
+    
+    return {
+        "backend_files": files,
+        "messages": [ai_msg]
+    }

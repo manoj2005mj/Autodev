@@ -2,6 +2,7 @@ import json
 from langchain_core.messages import AIMessage
 from src.core.state import GraphState
 from src.utils.llm_helper import invoke_llm_json, print_message_event
+from src.utils.code_exporter import CodeExporter
 from src.prompts.system_prompts import BACKEND_PROMPT
 
 def backend_node(state: GraphState):
@@ -27,6 +28,16 @@ def backend_node(state: GraphState):
         )
     
     files = invoke_llm_json(BACKEND_PROMPT, user_prompt)
+    
+    # 4. Export to JSON
+    if files:
+        exporter = CodeExporter()
+        metadata = {
+            "user_story": state.get("user_story", ""),
+            "iteration": state.get("iteration_count", 0),
+            "mode": "repair" if my_errors else "generation"
+        }
+        exporter.export_by_agent("backend", files, metadata=metadata)
     
     ai_msg = AIMessage(content="Backend code generated/updated.")
     print_message_event("backend", ai_msg.content, "new_message_added")

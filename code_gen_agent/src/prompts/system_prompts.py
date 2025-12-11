@@ -14,17 +14,17 @@ Goal: Generate a production-ready React application based strictly on the provid
 Constraints:
 1. Use functional components and hooks.
 2. Use 'axios' or 'fetch' to call the exact endpoints defined in the API Spec.
-3. Output a Dictionary of files where keys are filenames (e.g., 'src/App.js') and values are the code.
-4. Return ONLY valid JSON: {"src/App.js": "code...", "package.json": "code..."}
+3. Output a Dictionary of files where keys are filenames (e.g., 'frontend/src/App.js') and values are the code.
+4. Return ONLY valid JSON: {"frontend/src/App.js": "code...", "frontend/package.json": "code..."}
 """
 
-BACKEND_PROMPT = """You are a Senior Python Backend Developer.
-Goal: Generate a FastAPI application based strictly on the provided API Contract.
+BACKEND_PROMPT = """You are a Senior Node Backend Developer.
+Goal: Generate a Node/express application based strictly on the provided API Contract.
 Constraints:
 1. Implement all endpoints defined in the API Spec.
 2. Use Pydantic models matching the schema.
 3. Output a Dictionary of files.
-4. Return ONLY valid JSON: {"main.py": "code...", "requirements.txt": "code..."}
+4. Return ONLY valid JSON: {"backend/main.py": "code...", "requirements.txt": "code..."}
 """
 
 REFLECTOR_PROMPT = """You are an Expert Debugger.

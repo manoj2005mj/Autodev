@@ -40,14 +40,14 @@ def print_message_event(role: str, content, label: str = ""):
         label: Optional label for the message (e.g., which agent/node)
     """
     role_emoji = {
-        "user": "👤",
-        "system": "⚙️",
-        "ai": "🤖",
-        "human": "👨‍💼",
-        "architect": "🏗️",
-        "frontend": "🎨",
-        "backend": "⚙️",
-        "reflector": "🔍"
+        "user": "[USER]",
+        "system": "[SYS]",
+        "ai": "[AI]",
+        "human": "[HUMAN]",
+        "architect": "[ARCH]",
+        "frontend": "[FE]",
+        "backend": "[BE]",
+        "reflector": "[REFL]"
     }
     
     # Convert content to string if it's not already

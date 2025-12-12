@@ -105,7 +105,7 @@ class PythonSandbox:
                 if not syntax_errors:
                     print("[OK] All Python files have valid syntax")
                 else:
-                    print(f"⚠️ Found {len(syntax_errors)} syntax error(s)")
+                    print(f"[WARN] Found {len(syntax_errors)} syntax error(s)")
 
         # Check frontend structure
         fe_dir = os.path.join(self.output_dir, "frontend")
@@ -137,7 +137,7 @@ class PythonSandbox:
                     if results["docker_compose_valid"]:
                         print("[OK] docker-compose.yml exists and is not empty")
                 except Exception as e:
-                    print(f"⚠️ docker-compose.yml validation failed: {e}")
+                    print(f"[WARN] docker-compose.yml validation failed: {e}")
 
         return results
 
@@ -145,7 +145,7 @@ class PythonSandbox:
         """Save test results to JSON."""
         with open(self.log_file, "w", encoding="utf-8") as f:
             json.dump(logs, f, indent=2)
-        print(f"📄 Logs saved to {self.log_file}")
+        print(f"[LOG] Logs saved to {self.log_file}")
 
     def cleanup(self):
         """Clean up sandbox environment."""

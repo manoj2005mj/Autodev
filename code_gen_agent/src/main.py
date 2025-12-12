@@ -29,4 +29,4 @@ if __name__ == "__main__":
     # Run the graph
     app.invoke(initial_state)
     
-    print("✅ Process Finished.")
+    print("[OK] Process Finished.")

@@ -54,10 +54,10 @@ class PythonSandbox:
                 with open(filepath, "w", encoding="utf-8") as f:
                     f.write(content)
 
-        print(f"✅ Saved {len(frontend_files)} frontend files")
-        print(f"✅ Saved {len(backend_files)} backend files")
+        print(f"[OK] Saved {len(frontend_files)} frontend files")
+        print(f"[OK] Saved {len(backend_files)} backend files")
         if infra_files:
-            print(f"✅ Saved {len(infra_files)} infra files")
+            print(f"[OK] Saved {len(infra_files)} infra files")
 
     def validate_python_syntax(self, python_files: dict) -> dict:
         """Validate Python file syntax."""
@@ -103,7 +103,7 @@ class PythonSandbox:
                 syntax_errors = self.validate_python_syntax(python_files)
                 results["backend_syntax_errors"] = syntax_errors
                 if not syntax_errors:
-                    print("✅ All Python files have valid syntax")
+                    print("[OK] All Python files have valid syntax")
                 else:
                     print(f"⚠️ Found {len(syntax_errors)} syntax error(s)")
 
@@ -116,7 +116,7 @@ class PythonSandbox:
                 "has_index_html": "index.html" in files or "public/index.html" in str(os.listdir(fe_dir)),
                 "total_files": len(files),
             }
-            print(f"✅ Frontend has {len(files)} files")
+            print(f"[OK] Frontend has {len(files)} files")
 
         # Check docker-compose
         infra_dir = os.path.join(self.output_dir, "infra")
@@ -128,14 +128,14 @@ class PythonSandbox:
                     with open(docker_file, "r") as f:
                         yaml.safe_load(f)
                     results["docker_compose_valid"] = True
-                    print("✅ docker-compose.yml is valid")
+                    print("[OK] docker-compose.yml is valid")
                 except ImportError:
                     # YAML not available, just check it's not empty
                     with open(docker_file, "r") as f:
                         content = f.read().strip()
                     results["docker_compose_valid"] = len(content) > 0
                     if results["docker_compose_valid"]:
-                        print("✅ docker-compose.yml exists and is not empty")
+                        print("[OK] docker-compose.yml exists and is not empty")
                 except Exception as e:
                     print(f"⚠️ docker-compose.yml validation failed: {e}")
 

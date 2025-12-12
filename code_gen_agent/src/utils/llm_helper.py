@@ -134,9 +134,9 @@ def invoke_llm_json(system_prompt: str, user_prompt: str) -> dict:
         return json.loads(content)
 
     except json.JSONDecodeError as e:
-        print(f"❌ JSON Parse Error: {e}")
+        print(f"[ERROR] JSON Parse Error: {e}")
         print(f"   Raw Content: {content[:200] if content else 'Unknown'}...")  # Print first 200 chars for debug
         return {}
     except Exception as e:
-        print(f"❌ LLM Error: {e}")
+        print(f"[ERROR] LLM Error: {e}")
         return {}

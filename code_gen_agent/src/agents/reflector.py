@@ -10,14 +10,14 @@ def reflector_node(state: GraphState):
     feedback = state.get("human_feedback", "")
     iteration = state.get("iteration_count", 0)
     
-    print(f"📊 Iteration: {iteration + 1}")
+    print(f"[INFO] Iteration: {iteration + 1}")
     
     if feedback.lower().strip() in ["success", "done", "looks good"]:
-        print("✅ SUCCESS! Code passed all tests. No errors to fix.")
+        print("[OK] SUCCESS! Code passed all tests. No errors to fix.")
         return {"structured_errors": []}
         
     # Call LLM to parse the error
-    print("\n🤖 Parsing error feedback with AI...")
+    print("\n[PARSE] Parsing error feedback with AI...")
     structured_errors = invoke_llm_json(REFLECTOR_PROMPT, f"Log: {feedback}")
     
     # Ensure it's a list
@@ -25,7 +25,7 @@ def reflector_node(state: GraphState):
         structured_errors = []
     
     if structured_errors:
-        print(f"\n📋 Found {len(structured_errors)} error(s) to fix:")
+        print(f"\n[INFO] Found {len(structured_errors)} error(s) to fix:")
         for i, err in enumerate(structured_errors, 1):
             agent = err.get('agent', 'unknown')
             instruction = err.get('instruction', 'No instruction')[:100]

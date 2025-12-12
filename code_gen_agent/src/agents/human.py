@@ -22,7 +22,7 @@ def human_node(state: GraphState):
     save_files(output_dir, state.get("frontend_files", {}))
     save_files(output_dir, state.get("backend_files", {}))
     
-    print(f"\n✅ Code has been written to ./{output_dir}")
+    print(f"\n[OK] Code has been written to ./{output_dir}")
     print("\n🔧 Action Required: Run the code manually in another terminal.")
     print("   Type 'success' if it works, or paste the error log below:\n")
     

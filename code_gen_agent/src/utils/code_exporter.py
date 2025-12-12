@@ -75,7 +75,7 @@ class CodeExporter:
         with open(filepath, "w", encoding="utf-8") as f:
             json.dump(export_data, f, indent=2, ensure_ascii=False)
 
-        print(f"✅ Code exported to JSON: {filepath}")
+        print(f"[OK] Code exported to JSON: {filepath}")
         return filepath
 
     def export_by_agent(
@@ -113,7 +113,7 @@ class CodeExporter:
         with open(filepath, "w", encoding="utf-8") as f:
             json.dump(export_data, f, indent=2, ensure_ascii=False)
 
-        print(f"✅ {agent_name.upper()} code exported to JSON: {filepath}")
+        print(f"[OK] {agent_name.upper()} code exported to JSON: {filepath}")
         return filepath
 
     def load_from_json(self, filepath: str) -> Dict[str, Any]:
@@ -142,7 +142,7 @@ class CodeExporter:
             Summary string
         """
         summary_text = (
-            f"\n📋 Code Export Summary:\n"
+            f"\n[INFO] Code Export Summary:\n"
             f"   Frontend Files: {len(frontend_files)}\n"
             f"   Backend Files: {len(backend_files)}\n"
             f"   Total Files: {len(frontend_files) + len(backend_files)}\n"

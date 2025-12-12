@@ -7,12 +7,12 @@ def reflector_node(state: GraphState):
     print("🔍 REFLECTOR: Analyzing Feedback")
     print("="*60)
     
-    feedback = state["human_feedback"]
+    feedback = state.get("human_feedback", "")
     iteration = state.get("iteration_count", 0)
     
     print(f"📊 Iteration: {iteration + 1}")
     
-    if feedback.lower().strip() == "success":
+    if feedback.lower().strip() in ["success", "done", "looks good"]:
         print("✅ SUCCESS! Code passed all tests. No errors to fix.")
         return {"structured_errors": []}
         

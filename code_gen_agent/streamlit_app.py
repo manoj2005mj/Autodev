@@ -106,7 +106,6 @@ if snapshot.values:
             st.session_state.graph.update_state(
                 config, 
                 {"human_feedback": feedback}, 
-                as_node="human" # We pretend to be the human node
             )
             
             # Continue execution (will go to Reflector -> Router -> Agents)
